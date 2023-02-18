@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 import signal
 from prj_db_connector import get_user
@@ -24,7 +24,8 @@ def stop_server():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return "<H1> 404 </H1><p>Oops!</p>", 404
+    return render_template('404.html'), 404
+    # return "<H1> 404 </H1><p>Page not Found!</p>", 404
 
 
 app.run(host='127.0.0.1', debug=True, port=5001)

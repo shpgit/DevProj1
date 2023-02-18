@@ -1,4 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
+import os
+import signal
 
 from prj_db_connector import add_user, get_user, put_user, delete_user
 
@@ -52,7 +54,19 @@ def user(user_id):
 
 
 
-# todo elif for get put and delete
+
+@app.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    return 'Server stopped'
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+    # return "<H1> 404 </H1><p>Page not Found!</p>", 404
+
+
 
 
 app.run(host='127.0.0.1', debug=True, port=5000)

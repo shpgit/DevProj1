@@ -19,7 +19,7 @@ def get_user(user_id):
         # Get data from table
         cursor.execute(f"SELECT user_name FROM {schema_name}.users WHERE user_id='{user_id}';")
         row = cursor.fetchone()
-        username = row[1]
+        username = row[0]
 
         cursor.close()
         conn.close()

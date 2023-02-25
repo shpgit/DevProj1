@@ -53,8 +53,6 @@ def user(user_id):
             return getuser
 
 
-
-
 @app.route('/stop_server')
 def stop_server():
     os.kill(os.getpid(), signal.CTRL_C_EVENT)
@@ -65,8 +63,6 @@ def stop_server():
 def page_not_found(e):
     return render_template('404.html'), 404
     # return "<H1> 404 </H1><p>Page not Found!</p>", 404
-
-
 
 
 app.run(host='127.0.0.1', debug=True, port=5000)

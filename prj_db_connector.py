@@ -2,7 +2,6 @@ import pymysql
 
 
 def get_user(user_id):
-
     try:
         schema_name = 'freedb_DevOpsDB202212'
         # Establishing a connection to DB
@@ -20,7 +19,7 @@ def get_user(user_id):
         # Get data from table
         cursor.execute(f"SELECT user_name FROM {schema_name}.users WHERE user_id='{user_id}';")
         row = cursor.fetchone()
-        username = row[0]
+        username = row[1]
 
         cursor.close()
         conn.close()
@@ -51,6 +50,34 @@ def add_user(user_id, user_name):
 
         # Inserting data into table
         cursor.execute(f"INSERT into {schema_name}.users (user_id, user_name) VALUES ('{user_id}', '{user_name}');")
+
+        cursor.close()
+        conn.close()
+        return cursor
+
+    except Exception as e:
+        f = f'somthing went wrong, error {e}'
+    return f
+
+
+def validate_user(user_id, user_name):
+
+    try:
+        schema_name = 'freedb_DevOpsDB202212'
+        # Establishing a connection to DB
+        conn = pymysql.connect(
+            host='sql.freedb.tech',
+            port=3306,
+            user='freedb_devuser',
+            passwd='Xr2&HQ3nX#gX2#E',
+            db=schema_name)
+        conn.autocommit(True)
+
+        # Getting a cursor from Database
+        cursor = conn.cursor()
+
+        # Inserting data into table
+        cursor.execute(f"SELECT * FROM {schema_name}.users WHERE user_id='{user_id}' AND user_name='{user_name}';")
 
         cursor.close()
         conn.close()

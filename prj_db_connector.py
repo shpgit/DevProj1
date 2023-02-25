@@ -76,7 +76,7 @@ def validate_user(user_id, user_name):
         # Getting a cursor from Database
         cursor = conn.cursor()
 
-        # Inserting data into table
+        # validate data in the table
         cursor.execute(f"SELECT * FROM {schema_name}.users WHERE user_id='{user_id}' AND user_name='{user_name}';")
 
         cursor.close()
@@ -103,7 +103,7 @@ def put_user(user_id, user_name):
         # Getting a cursor from Database
         cursor = conn.cursor()
 
-        # Inserting data into table
+        # updating data in the table
         cursor.execute(f"UPDATE {schema_name}.users SET user_id = '{user_id}' WHERE user_name = '{user_name}';")
 
         cursor.close()
@@ -134,7 +134,7 @@ def delete_user(user_id):
         # Getting a cursor from Database
         cursor = conn.cursor()
 
-        # Inserting data into table
+        # deleting data from table
         cursor.execute(f"DELETE FROM {schema_name}.users WHERE user_id = '{user_id}';")
 
         cursor.close()

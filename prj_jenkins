@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+        stages {
+            stage('checkout') {
+                steps {
+                    git 'https://github.com/shpgit/DevProj1'
+            }
+        }
+            stage('Install requirements.txt') {
+                steps {
+                    sh 'pip install --user -r requirements.txt'
+                }
+            }
+             stage('Run prj_rest_app') {
+                steps {
+                    script {
+                        sh 'nohup python3 prj_rest_app.py &'
+                    }
+                }
+            }
+
+            stage('Run prj_web_app') {
+                steps {
+                    script {
+
+                        sh 'nohup python3 prj_web_app.py &'
+                }
+            }
+        }
+            stage('Run prj_backend_testing') {
+                steps {
+                    script {
+                        sh 'python3 prj_tests/prj_backend_testing.py'
+                }
+            }
+        }
+            stage('Run prj_frontend_testing') {
+                steps {
+                    script {
+                        sh 'python3 prj_tests/prj_frontend_testing.py'
+                }
+            }
+        }
+            stage('Run prj_combined_testing') {
+                steps {
+                    script {
+                        sh 'python3 prj_tests/prj_combined_testing.py'
+                }
+            }
+        }
+            stage('Run prj_clean_environment') {
+                steps {
+                    script {
+                        sh 'python3 prj_clean_env.py'
+                }
+            }
+        }
+    }
+}
+

@@ -4,9 +4,9 @@ pipeline {
             stage('checkout') {
                 steps {
                     script {
-                        properties([pipelineTriggers([pollSCM('* * * * *')])])
+                        properties([pipelineTriggers([pollSCM('H/30 * * * *')])])
                     }
-                    git 'https://github.com/shpgit/DevProj1'
+                    git 'https://github.com/shpgit/DevProj1.git'
             }
         }
             stage('Install requirements.txt') {

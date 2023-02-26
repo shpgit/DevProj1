@@ -24,6 +24,6 @@ def frontend_testing(user_id):
 
 
 if __name__ == '__main__':
-    frontend_testing(2)
+    frontend_testing(1)
 
 
